@@ -1,4 +1,4 @@
-
+@import './bootstrap/scss/bootstrap.scss';
 html,
 body {
   padding: 0;
@@ -14,6 +14,7 @@ a {
 
 * {
   box-sizing: border-box;
+  cursor: url('https://i.imgur.com/vllSGoU.png'), auto;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,6 +23,7 @@ a {
   }
   body {
     color: white;
-    background: black;
+    background: #1b1a1a;
+    overflow-x: hidden;
   }
 }
