@@ -63,10 +63,10 @@ export function HomeScreen() {
   return (
     <div
       className={styles.container}
-      style={{
-        cursor:
-          "url(https://webstatic.hoyoverse.com/upload/uploadstatic/contentweb/20200316/2020031619494241375.png)",
-      }}
+      // style={{
+      //   cursor:
+      //     "url(https://webstatic.hoyoverse.com/upload/uploadstatic/contentweb/20200316/2020031619494241375.png)",
+      // }}
     >
       <Head>
         <title>Create Next App</title>
