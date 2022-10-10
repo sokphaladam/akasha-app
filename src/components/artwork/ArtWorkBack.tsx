@@ -25,6 +25,8 @@ export default function ArtWorkBack({
         borderTopLeftRadius: allBorderRadius ? 5 : 0,
         borderTopRightRadius: allBorderRadius ? 5 : 0,
         backgroundImage: `url(${artworkBack})`,
+        backgroundPosition: "center",
+        backgroundSize: "center",
       }}
     ></div>
   );

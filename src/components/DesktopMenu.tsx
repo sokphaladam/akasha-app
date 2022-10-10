@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { Button } from "primereact/button";
 
 const mapTab = [
   {
@@ -27,23 +28,18 @@ const mapTab = [
     link: "#",
     type: "tab",
   },
-  {
-    text: "link",
-    link: "#",
-    type: "link",
-  },
-  {
-    text: "link",
-    link: "#",
-    type: "link",
-  },
 ];
 
-export function DesktopMenu() {
+export default function DesktopMenu() {
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark"
-      style={{ background: "rgba(115, 115, 116, 0.5)" }}
+      style={{
+        background: "rgba(115, 115, 116, 0.5)",
+        position: "sticky",
+        top: 0,
+        zIndex: 999,
+      }}
     >
       <div className="container-fluid">
         <Link href="#">
@@ -63,6 +59,13 @@ export function DesktopMenu() {
                 </li>
               );
             })}
+            <li className="nav-item">
+              <Link href={"#"}>
+                <a className="nav-link">
+                  <i className="pi pi-facebook"></i>
+                </a>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
