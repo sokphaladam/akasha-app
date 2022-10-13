@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
+import { getHomeData } from "../../pages/api/home";
 import styles from "../../styles/Home.module.scss";
 import { Story } from "../components/artwork/Story";
 import { Cloud } from "../components/Cloud";
@@ -54,9 +55,9 @@ export function HomeScreen() {
   const height = process.browser ? window.innerHeight : 0;
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
 
-  // useEffect(() => {
-  //   useMediaQuery({ query: `(max-width: 760px)` })
-  // })
+  useEffect(() => {
+    getHomeData().then((data) => console.log(data));
+  });
 
   if (isMobile) {
     return <MobileHomeScreen />;
