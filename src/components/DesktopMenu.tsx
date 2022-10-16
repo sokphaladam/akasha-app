@@ -1,8 +1,14 @@
 import Link from "next/link";
 import React from "react";
-import { Button } from "primereact/button";
+import { TiSocialFacebook, TiSocialTwitter } from "react-icons/ti";
+import { FaDiscord } from "react-icons/fa";
 
 const mapTab = [
+  {
+    text: "Story",
+    link: "#",
+    type: "tab",
+  },
   {
     text: "Charater",
     link: "#",
@@ -61,8 +67,57 @@ export default function DesktopMenu() {
             })}
             <li className="nav-item">
               <Link href={"#"}>
-                <a className="nav-link">
-                  <i className="pi pi-facebook"></i>
+                <a
+                  className="nav-link"
+                  style={{
+                    borderStyle: "solid",
+                    borderWidth: 0.5,
+                    borderRadius: 5,
+                    height: 35,
+                    width: 35,
+                    alignItems: "center",
+                    display: "flex",
+                  }}
+                >
+                  <TiSocialTwitter />
+                </a>
+              </Link>
+            </li>
+            <li className="nav-item" style={{ marginInline: 7 }}>
+              <Link href={"#"}>
+                <a
+                  className="nav-link"
+                  style={{
+                    borderStyle: "solid",
+                    borderWidth: 0.5,
+                    borderRadius: 5,
+                    height: 35,
+                    width: 35,
+                    alignItems: "center",
+                    display: "flex",
+                  }}
+                >
+                  <FaDiscord />
+                </a>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href={"#"}>
+                <a
+                  className="nav-link"
+                  style={{
+                    borderStyle: "solid",
+                    borderWidth: 0.5,
+                    borderRadius: 5,
+                    height: 35,
+                    width: 35,
+                    alignItems: "center",
+                    display: "flex",
+                  }}
+                >
+                  {/* <img 
+                    src="https://ucarecdn.com/1958a2aa-cf35-4aa3-a4b6-ed34b726c3de/-/format/webp/-/resize/1000/" 
+                  /> */}
                 </a>
               </Link>
             </li>
@@ -72,3 +127,5 @@ export default function DesktopMenu() {
     </nav>
   );
 }
+
+export const DesktopMenuComponent = DesktopMenu;

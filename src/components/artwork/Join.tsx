@@ -1,27 +1,9 @@
-import Image from "next/image";
 import React from "react";
 import { BlockContent } from "../BlockContent";
 
-export function Story() {
+export function Join() {
   return (
-    <BlockContent title="Story">
-      <span
-        style={{
-          position: "absolute",
-          left: "-15%",
-          top: "-40%",
-        }}
-      >
-        <Image
-          src={require("../../../public/left.png")}
-          alt="Vercel Logo"
-          style={{
-            objectFit: "cover",
-          }}
-          width={650}
-          height={550}
-        />
-      </span>
+    <BlockContent title="Join the play">
       <p
         style={{
           width: "55%",
@@ -41,23 +23,7 @@ export function Story() {
         porro sequi corporis accusantium voluptas quos iusto obcaecati vel.
         Fugit nemo molestias id nihil velit aliquid ipsa itaque reiciendis rem.
       </p>
-      <span
-        style={{
-          position: "absolute",
-          right: "-15%",
-          top: "-40%",
-        }}
-      >
-        <Image
-          src={require("../../../public/right.png")}
-          alt="Vercel Logo"
-          style={{
-            objectFit: "cover",
-          }}
-          width={650}
-          height={650}
-        />
-      </span>
+      <button className="btn btn-light">Button</button>
     </BlockContent>
   );
 }
