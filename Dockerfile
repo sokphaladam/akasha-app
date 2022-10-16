@@ -21,6 +21,6 @@ COPY . .
 
 # Building app
 RUN yarn build
-#123
+
 # Running the app
 CMD [ "yarn", "start" ]
