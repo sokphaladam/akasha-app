@@ -3,9 +3,10 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import "../styles/globals.scss";
 
-import "primereact/resources/themes/saga-blue/theme.css"; //theme
-import "primereact/resources/primereact.min.css"; //core css
-import "primeicons/primeicons.css"; //icons
+import "primereact/resources/themes/saga-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import "primeflex/primeflex.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
