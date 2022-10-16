@@ -54,11 +54,9 @@ export function FAQ() {
               <Accordion.Item
                 eventKey={i + ""}
                 key={i}
-                style={{ backgroundColor: "#7d2e2e", color: "#f3f3f3" }}
+                style={{ backgroundColor: "#7d2e2e" }}
               >
-                <Accordion.Header
-                  style={{ backgroundColor: "#7d2e2e", color: "#f3f3f3" }}
-                >
+                <Accordion.Header style={{ backgroundColor: "#7d2e2e" }}>
                   {x.label}
                 </Accordion.Header>
                 <Accordion.Body>
