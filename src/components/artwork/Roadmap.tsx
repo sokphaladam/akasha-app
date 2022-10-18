@@ -95,7 +95,7 @@ const customizedContent: any = (item: any) => {
 
 export default function Roadmap() {
   return (
-    <BlockContent title="Roadmap">
+    <BlockContent title="Roadmap" id="roadmap">
       <div style={{ marginTop: "5%" }}>
         <Timeline
           value={[...events1, ...events1]}

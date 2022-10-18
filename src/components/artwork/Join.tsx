@@ -3,7 +3,7 @@ import { BlockContent } from "../BlockContent";
 
 export function Join() {
   return (
-    <BlockContent title="Join the play">
+    <BlockContent title="Join the play" id="enter">
       <p
         style={{
           width: "55%",

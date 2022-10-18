@@ -46,7 +46,7 @@ export function FAQ() {
   ];
 
   return (
-    <BlockContent title="FAQ">
+    <BlockContent title="FAQ" id="faq">
       <div style={{ marginTop: 25 }}>
         <Accordion defaultActiveKey="0" style={{ backgroundColor: "#7d2e2e" }}>
           {items.map((x, i) => {

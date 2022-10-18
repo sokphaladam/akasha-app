@@ -2,6 +2,7 @@ import React from "react";
 
 interface Props {
   title: string;
+  id?: string;
 }
 
 export function BlockContent(props: React.PropsWithChildren<Props>) {
@@ -11,6 +12,7 @@ export function BlockContent(props: React.PropsWithChildren<Props>) {
         padding: "0rem 10%",
         marginTop: "-3%",
       }}
+      id={props.id + ""}
     >
       <div
         style={{

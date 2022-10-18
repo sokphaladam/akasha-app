@@ -6,32 +6,32 @@ import { FaDiscord } from "react-icons/fa";
 const mapTab = [
   {
     text: "Story",
-    link: "#",
+    link: "#story",
     type: "tab",
   },
   {
-    text: "Charater",
-    link: "#",
+    text: "Character",
+    link: "#character",
     type: "tab",
   },
   {
     text: "Roadmap",
-    link: "#",
+    link: "#roadmap",
     type: "tab",
   },
   {
     text: "Team",
-    link: "#",
+    link: "#team",
     type: "tab",
   },
   {
     text: "FAQ",
-    link: "#",
+    link: "#faq",
     type: "tab",
   },
   {
     text: "Enter",
-    link: "#",
+    link: "#enter",
     type: "tab",
   },
 ];
@@ -59,7 +59,7 @@ export default function DesktopMenu() {
             {mapTab.map((tab, index) => {
               return (
                 <li key={index} className="nav-item">
-                  <Link href={"#"}>
+                  <Link href={tab.link}>
                     <a className="nav-link">{tab.text}</a>
                   </Link>
                 </li>

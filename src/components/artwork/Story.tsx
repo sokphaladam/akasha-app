@@ -4,7 +4,7 @@ import { BlockContent } from "../BlockContent";
 
 export function Story() {
   return (
-    <BlockContent title="Story">
+    <BlockContent title="Story" id="story">
       <span
         style={{
           position: "absolute",

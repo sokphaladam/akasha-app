@@ -164,7 +164,7 @@ export default function Charater() {
   const [ri, setRi] = useState(3);
 
   return (
-    <BlockContent title="Character">
+    <BlockContent title="Character" id="character">
       <p
         style={{
           width: "55%",

@@ -11,8 +11,11 @@ import { Story } from "../components/artwork/Story";
 import { BlockContent } from "../components/BlockContent";
 import { Cloud } from "../components/Cloud";
 import { DesktopMenuComponent } from "../components/DesktopMenu";
-import { Layout } from "../components/Layout";
 import TeamComponent from "../components/TeamComponent";
+
+const Layout = dynamic(() => import("../components/Layout"), {
+  ssr: false,
+});
 
 const ArtWorkBack = dynamic(() => import("../components/artwork/ArtWorkBack"), {
   ssr: false,

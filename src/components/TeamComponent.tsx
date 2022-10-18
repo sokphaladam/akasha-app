@@ -2,14 +2,59 @@
 import React from "react";
 import { BlockContent } from "./BlockContent";
 
-function AvatarUser() {
+const data = [
+  {
+    profile: "/assets/team/1.jpg",
+    name: "Morris",
+    age: "27",
+    hobby: "Writer",
+  },
+  {
+    profile: "/assets/team/2.jpg",
+    name: "Lessor",
+    age: "24",
+    hobby: "Singing",
+  },
+  {
+    profile: "/assets/team/3.jpg",
+    name: "Mottoes lessor",
+    age: "18",
+    hobby: "Trouble maker",
+  },
+  {
+    profile: "/assets/team/4.jpg",
+    name: "Morris",
+    age: "27",
+    hobby: "Writer",
+  },
+  {
+    profile: "/assets/team/5.jpg",
+    name: "Lessor",
+    age: "24",
+    hobby: "Singing",
+  },
+  {
+    profile: "/assets/team/6.jpg",
+    name: "Mottoes lessor",
+    age: "18",
+    hobby: "Trouble maker",
+  },
+  {
+    profile: "/assets/team/1.jpg",
+    name: "Morris",
+    age: "27",
+    hobby: "Writer",
+  },
+];
+
+function AvatarUser({ data }: { data: any }) {
   return (
     <div style={{ margin: "1rem", width: 250 }}>
       <div style={{ position: "relative", height: 280 }}>
         <div className="team">
           <div className="content">
             <img
-              src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              src={data.profile}
               alt=""
               style={{
                 width: 250,
@@ -20,7 +65,7 @@ function AvatarUser() {
               className="front"
             />
             <img
-              src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={data.profile}
               alt=""
               style={{
                 width: 250,
@@ -48,8 +93,11 @@ function AvatarUser() {
         </a>
       </div>
       <div style={{ textAlign: "left" }}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
-        consequuntur
+        <small>Name {data.name}</small>
+        <br />
+        <small>Age {data.age}</small>
+        <br />
+        <small>Hobby {data.hobby}</small>
       </div>
     </div>
   );
@@ -57,7 +105,7 @@ function AvatarUser() {
 
 export default function TeamComponent() {
   return (
-    <BlockContent title="Team">
+    <BlockContent title="Team" id="team">
       <div
         style={{
           marginTop: 15,
@@ -82,8 +130,8 @@ export default function TeamComponent() {
             flexWrap: "wrap",
           }}
         >
-          {[...new Array(7)].map((x, i) => {
-            return <AvatarUser key={i} />;
+          {data.map((x, i) => {
+            return <AvatarUser key={i} data={x} />;
           })}
         </div>
       </div>
