@@ -1,8 +1,9 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BlockContent } from "../BlockContent";
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
+import autoAnimate from "@formkit/auto-animate";
 
 const mapCharater = [
   {
@@ -72,48 +73,6 @@ function CharacterImage({
     xys: [0, 0, 1],
     config: config.default,
   }));
-  // const MAX_ROTATE_X = 20;
-  // const MAX_ROTATE_Y = 18;
-
-  // const onMouseMove = (event: any) => {
-  //   const card = {
-  //     halfHeight: event.target.height / 2,
-  //     halfWidth: event.target.width / 2,
-  //   };
-  //   const degsToRotateY =
-  //     ((card.halfWidth - event.offsetX) * MAX_ROTATE_Y) / card.halfWidth;
-  //   const degsToRotateX =
-  //     ((card.halfHeight - event.offsetY) * -MAX_ROTATE_X) / card.halfHeight;
-  //   event.target.style.transform = `rotateX(${degsToRotateX}deg) rotateY(${degsToRotateY}deg)`;
-  // };
-
-  // const applySlowTransitionAnimation = (mouseOutEvent: any) => {
-  //   mouseOutEvent.target.style.transition = "400ms ease-out";
-  // };
-
-  // const applyFastTransitionAnimation = (mouseEnterEvent: any) => {
-  //   mouseEnterEvent.target.style.transition = "50ms linear";
-  // };
-
-  // const resetCardPosition = (mouseOutEvent: any) => {
-  //   mouseOutEvent.target.style.transform = "rotateX(0deg) rotateY(0deg)";
-  // };
-
-  // useEffect(() => {
-  //   const cardElement = document.getElementById("char");
-  //   if (cardElement) {
-  //     cardElement?.addEventListener("mouseenter", (event) => {
-  //       applyFastTransitionAnimation(event);
-  //       cardElement.addEventListener("mousemove", onMouseMove);
-  //     });
-
-  //     cardElement?.addEventListener("mouseout", (event) => {
-  //       applySlowTransitionAnimation(event);
-  //       resetCardPosition(event);
-  //       cardElement.removeEventListener("mousemove", onMouseMove);
-  //     });
-  //   }
-  // }, []);
 
   return (
     <Container
@@ -130,38 +89,45 @@ function CharacterImage({
   );
 }
 
-// class CharacterImageClass extends React.Component<{
-//   width: number;
-//   height: number;
-//   image: string;
-// }> {
-//   constructor(props: any) {
-//     super(props);
-//   }
-
-//   render(): React.ReactNode {
-//     const { width, height, image } = this.props;
-//     return (
-//       <div
-//         style={{
-//           backgroundColor: "#345b4b",
-//           width,
-//           height,
-//           borderRadius: 5,
-//           margin: "1rem",
-//           backgroundImage: `url(${image})`,
-//           backgroundSize: "cover",
-//           backgroundPosition: "bottom",
-//         }}
-//         className="char"
-//       ></div>
-//     );
-//   }
-// }
-
 export default function Charater() {
-  const [li, setLi] = useState(0);
-  const [ri, setRi] = useState(3);
+  const leftList = useRef(null);
+  const rightList = useRef(null);
+  const [index, setIndex] = useState<number>(0);
+  const [limit, setLimit] = useState<number>(2);
+  const [leftCharacter, setLeftCharacter] = useState([
+    ...mapCharater,
+    ...mapCharater.filter((_, i) => i <= limit),
+  ]);
+  const [rightCharacter, setRightCharacter] = useState([
+    ...mapCharater.reverse(),
+    ...mapCharater.reverse().filter((_, i) => i <= limit),
+  ]);
+
+  useEffect(() => {
+    leftList.current &&
+      autoAnimate(leftList.current, {
+        duration: 250,
+        easing: "ease-in-out",
+        disrespectUserMotionPreference: true,
+      });
+    rightList.current &&
+      autoAnimate(rightList.current, {
+        duration: 350,
+        easing: "ease-in-out",
+        disrespectUserMotionPreference: true,
+      });
+  }, [leftList, rightList]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIndex(index + 1);
+      if (index >= mapCharater.length) {
+        setIndex(1);
+      } else {
+        setIndex(index + 1);
+      }
+    }, 5000);
+  });
 
   return (
     <BlockContent title="Character" id="character">
@@ -190,10 +156,11 @@ export default function Charater() {
         }}
       >
         <div style={{ display: "flex" }}>
-          <div>
-            {mapCharater
-              .filter((x, i) => i < 3)
-              .map((x, i) => {
+          <div ref={leftList}>
+            {leftCharacter.map((x, i) => {
+              if (i < index) return <></>;
+              if (i > index + limit) return <></>;
+              if (i >= index || i <= index + limit) {
                 return (
                   <CharacterImage
                     width={75}
@@ -202,24 +169,27 @@ export default function Charater() {
                     key={i}
                   />
                 );
-              })}
+              }
+              return <></>;
+            })}
           </div>
           <CharacterImage
             width={75 * 3 + 30}
             height={75 * 3 + 30}
-            image={mapCharater[li].bgImage}
+            image={leftCharacter[index].bgImage}
           />
         </div>
         <div style={{ display: "flex" }}>
           <CharacterImage
             width={75 * 3 + 30}
             height={75 * 3 + 30}
-            image={mapCharater[ri].bgImage}
+            image={rightCharacter[index].bgImage}
           />
-          <div>
-            {mapCharater
-              .filter((x, i) => i > 2)
-              .map((x, i) => {
+          <div ref={rightList}>
+            {rightCharacter.map((x, i) => {
+              if (i < index) return <></>;
+              if (i > index + limit) return <></>;
+              if (i >= index || i <= index + limit) {
                 return (
                   <CharacterImage
                     width={75}
@@ -228,7 +198,9 @@ export default function Charater() {
                     key={i}
                   />
                 );
-              })}
+              }
+              return <></>;
+            })}
           </div>
         </div>
       </div>
