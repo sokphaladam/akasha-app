@@ -135,7 +135,7 @@ export function HomeScreen() {
         />
         <Story story={content.find((x) => x.key === "STORY")} />
         <div style={{ marginTop: "10%" }}>
-          <Charater />
+          <Charater character={content.find((x) => x.key === "CHARACTER")} />
         </div>
       </div>
       <ArtWorkBack

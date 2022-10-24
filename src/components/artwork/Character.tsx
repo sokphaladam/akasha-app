@@ -89,7 +89,7 @@ function CharacterImage({
   );
 }
 
-export default function Charater() {
+export default function Charater({character}: {character: any}) {
   const leftList = useRef(null);
   const rightList = useRef(null);
   const [index, setIndex] = useState<number>(0);
@@ -139,13 +139,8 @@ export default function Charater() {
           marginBottom: "5rem",
           marginTop: "4.5rem",
         }}
+        dangerouslySetInnerHTML={{ __html: character.content_one }}
       >
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero officiis,
-        porro sequi corporis accusantium voluptas quos iusto obcaecati vel.
-        Fugit nemo molestias id nihil velit aliquid ipsa itaque reiciendis rem.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero officiis,
-        porro sequi corporis accusantium voluptas quos iusto obcaecati vel.
-        Fugit nemo molestias id nihil velit aliquid ipsa itaque reiciendis rem.
       </p>
       <div
         style={{
@@ -212,13 +207,8 @@ export default function Charater() {
           marginBottom: "5rem",
           marginTop: "4.5rem",
         }}
+        dangerouslySetInnerHTML={{ __html: character.content_two }}
       >
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero officiis,
-        porro sequi corporis accusantium voluptas quos iusto obcaecati vel.
-        Fugit nemo molestias id nihil velit aliquid ipsa itaque reiciendis rem.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero officiis,
-        porro sequi corporis accusantium voluptas quos iusto obcaecati vel.
-        Fugit nemo molestias id nihil velit aliquid ipsa itaque reiciendis rem.
       </p>
     </BlockContent>
   );
