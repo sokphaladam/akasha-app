@@ -1,7 +1,9 @@
+import { collection } from "firebase/firestore";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useCollection } from "react-firebase-hooks/firestore";
 import { useMediaQuery } from "react-responsive";
 import { getHomeData } from "../../pages/api/home";
 import styles from "../../styles/Home.module.scss";
@@ -12,6 +14,8 @@ import { BlockContent } from "../components/BlockContent";
 import { Cloud } from "../components/Cloud";
 import { DesktopMenuComponent } from "../components/DesktopMenu";
 import TeamComponent from "../components/TeamComponent";
+import { SettingContext } from "../context/SettingContext";
+import { database } from "../store/firebase";
 
 const Layout = dynamic(() => import("../components/Layout"), {
   ssr: false,
@@ -56,6 +60,14 @@ function MobileHomeScreen() {
 }
 
 export function HomeScreen() {
+  const { setting } = useContext(SettingContext);
+  const [content, setContent] = useState<any[]>([]);
+  const [value, loading, error] = useCollection(
+    collection(database, "content_block"),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    }
+  );
   const width = process.browser ? window.innerWidth : 0;
   const height = process.browser ? window.innerHeight : 0;
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
@@ -64,14 +76,33 @@ export function HomeScreen() {
     getHomeData().then((data) => console.log(data));
   });
 
+  useEffect(() => {
+    if (!loading && value && content.length === 0) {
+      setContent(
+        value.docs.map((x) => {
+          return {
+            ...x.data(),
+            key: x.id,
+          };
+        })
+      );
+    }
+  }, [content, loading, value]);
+
   if (isMobile) {
     return <MobileHomeScreen />;
   }
 
+  if (loading) return <div></div>;
+
+  const logo = content.find((x) => x.key === "LOGO");
+
+  if (!logo) return <div></div>;
+
   return (
     <Layout>
       <ArtWorkBack
-        artworkBack="https://thumbs.gfycat.com/AdorableBrownEuropeanfiresalamander-size_restricted.gif"
+        artworkBack={setting.loading ? "" : setting.value.background[0]}
         height={height}
         width={width}
       />
@@ -85,32 +116,33 @@ export function HomeScreen() {
               marginBottom: "5rem",
               marginTop: "4.5rem",
             }}
+            dangerouslySetInnerHTML={{
+              __html: logo.content,
+            }}
+          ></p>
+          <button
+            className="btn btn-light"
+            onClick={() => window.open(logo.btn.link, "_blank")}
           >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero
-            officiis, porro sequi corporis accusantium voluptas quos iusto
-            obcaecati vel. Fugit nemo molestias id nihil velit aliquid ipsa
-            itaque reiciendis rem. Lorem ipsum dolor, sit amet consectetur
-            adipisicing elit. Vero officiis, porro sequi corporis accusantium
-            voluptas quos iusto obcaecati vel. Fugit nemo molestias id nihil
-            velit aliquid ipsa itaque reiciendis rem. Lorem ipsum dolor, sit
-            amet consectetur adipisicing elit. Vero officiis, porro sequi
-            corporis accusantium voluptas quos iusto obcaecati vel. Fugit nemo
-            molestias id nihil velit aliquid ipsa itaque reiciendis rem.
-          </p>
-          <button className="btn btn-light">Button</button>
+            {logo.btn.label}
+          </button>
         </BlockContent>
         <ArtWorkBack
           width={width}
           height={height / 1.5}
-          artworkBack="https://cdnb.artstation.com/p/assets/images/images/046/373/757/4k/amanda-melville-amelville-postprocess-scene-06.jpg?1644959988"
+          artworkBack={setting.loading ? "" : setting.value.background[1]}
           allBorderRadius={true}
         />
-        <Story />
+        <Story story={content.find((x) => x.key === "STORY")} />
         <div style={{ marginTop: "10%" }}>
           <Charater />
         </div>
       </div>
-      <ArtWorkBack artworkBack="" width={width} height={height / 1.5} />
+      <ArtWorkBack
+        artworkBack={setting.loading ? "" : setting.value.background[2]}
+        width={width}
+        height={height / 1.5}
+      />
       <div
         style={{
           padding: "0rem 3rem",

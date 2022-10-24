@@ -1,15 +1,17 @@
 import Head from "next/head";
-import React from "react";
+import React, { useContext } from "react";
 import DesktopMenu from "./DesktopMenu";
 import styles from "../../styles/Home.module.scss";
 import Image from "next/image";
 import { Popbutton } from "./Popbutton";
+import { SettingContext } from "../context/SettingContext";
 
 interface Props {
   title?: string;
 }
 
 export default function Layout(props: React.PropsWithChildren<Props>) {
+  const { setting } = useContext(SettingContext);
   return (
     <div
       style={{
@@ -39,21 +41,20 @@ export default function Layout(props: React.PropsWithChildren<Props>) {
               />
             </span>
           </a>
-          <p
-            style={{
-              width: "55%",
-              color: "#f3f3f3",
-              margin: "auto",
-              marginTop: "0.2rem",
-              textAlign: "center",
-            }}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero
-            officiis, porro sequi corporis accusantium voluptas quos iusto
-            obcaecati vel. Fugit nemo molestias id nihil velit aliquid ipsa
-            itaque reiciendis rem. Lorem ipsum dolor, sit amet consectetur
-            adipisicing elit. Vero officiis, porro sequi corporis accusantium
-          </p>
+          {!setting.loading && (
+            <p
+              style={{
+                width: "55%",
+                color: "#f3f3f3",
+                margin: "auto",
+                marginTop: "0.2rem",
+                textAlign: "center",
+              }}
+              dangerouslySetInnerHTML={{
+                __html: setting.value.footer.content + "",
+              }}
+            ></p>
+          )}
         </div>
       </footer>
       <Popbutton />

@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import { TiSocialFacebook, TiSocialTwitter } from "react-icons/ti";
 import { FaDiscord } from "react-icons/fa";
+import { SettingContext } from "../context/SettingContext";
 
 const mapTab = [
   {
@@ -37,6 +40,10 @@ const mapTab = [
 ];
 
 export default function DesktopMenu() {
+  const { setting } = useContext(SettingContext);
+
+  if (setting.loading) return <div></div>;
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark"
@@ -49,7 +56,13 @@ export default function DesktopMenu() {
     >
       <div className="container-fluid">
         <Link href="#">
-          <a className="navbar-brand">Logo</a>
+          <a className="navbar-brand">
+            {setting.value ? (
+              <img src={setting.value.logo} style={{ width: 50, height: 50 }} />
+            ) : (
+              "LOGO"
+            )}
+          </a>
         </Link>
         <div
           className="collapse navbar-collapse justify-content-end"
@@ -66,7 +79,7 @@ export default function DesktopMenu() {
               );
             })}
             <li className="nav-item">
-              <Link href={"#"}>
+              <Link href={setting.value.link.twitter} target="_blank">
                 <a
                   className="nav-link"
                   style={{
@@ -84,7 +97,7 @@ export default function DesktopMenu() {
               </Link>
             </li>
             <li className="nav-item" style={{ marginInline: 7 }}>
-              <Link href={"#"}>
+              <Link href={setting.value.link.discord} target="_blank">
                 <a
                   className="nav-link"
                   style={{
@@ -102,7 +115,7 @@ export default function DesktopMenu() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link href={"#"}>
+              <Link href={setting.value.link.cardano} target="_blank">
                 <a
                   className="nav-link"
                   style={{

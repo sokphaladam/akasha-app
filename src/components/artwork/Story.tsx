@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { BlockContent } from "../BlockContent";
 
-export function Story() {
+export function Story({ story }: { story: any }) {
   return (
     <BlockContent title="Story" id="story">
       <span
@@ -13,7 +13,7 @@ export function Story() {
         }}
       >
         <Image
-          src={require("../../../public/left.png")}
+          src={story.artwork_left}
           alt="Vercel Logo"
           style={{
             objectFit: "cover",
@@ -30,17 +30,8 @@ export function Story() {
           marginBottom: "5rem",
           marginTop: "4.5rem",
         }}
-      >
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero officiis,
-        porro sequi corporis accusantium voluptas quos iusto obcaecati vel.
-        Fugit nemo molestias id nihil velit aliquid ipsa itaque reiciendis rem.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero officiis,
-        porro sequi corporis accusantium voluptas quos iusto obcaecati vel.
-        Fugit nemo molestias id nihil velit aliquid ipsa itaque reiciendis rem.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero officiis,
-        porro sequi corporis accusantium voluptas quos iusto obcaecati vel.
-        Fugit nemo molestias id nihil velit aliquid ipsa itaque reiciendis rem.
-      </p>
+        dangerouslySetInnerHTML={{ __html: story.content + "" }}
+      ></p>
       <span
         style={{
           position: "absolute",
@@ -49,7 +40,7 @@ export function Story() {
         }}
       >
         <Image
-          src={require("../../../public/right.png")}
+          src={story.artwork_right}
           alt="Vercel Logo"
           style={{
             objectFit: "cover",

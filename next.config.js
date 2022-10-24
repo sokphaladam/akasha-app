@@ -7,6 +7,6 @@ const nextConfig = {
 module.exports = {
   ...nextConfig,
   images: {
-    domains: ['act.hoyoverse.com', 'static.wikia.nocookie.net'],
+    domains: ['act.hoyoverse.com', 'static.wikia.nocookie.net', 'firebasestorage.googleapis.com'],
   },
 }
